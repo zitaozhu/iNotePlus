@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.zhuxiaodong.inoteplus.widgets.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zhuxiaodong.inoteplus.activities.MainActivity"
+    android:background="@android:color/transparent">
+
+    <!--lower layout on the left-->
+    <include layout="@layout/left_view_layout"/>
+
+    <com.example.zhuxiaodong.inoteplus.widgets.CustomRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:id="@+id/rl_title"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:gravity="bottom"
+                android:background="@android:color/holo_orange_light"
+                >
+                <include layout="@layout/common_top_bar"/>
+            </RelativeLayout>
+            <!--put content in Fragment-->
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <fragment
+                    android:id="@+id/main_info_fragment"
+                    class="com.example.zhuxiaodong.inoteplus.fragments.OneFragment"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_menu_send" />
+
+    </com.example.zhuxiaodong.inoteplus.widgets.CustomRelativeLayout>
+
+
+
+</com.example.zhuxiaodong.inoteplus.widgets.DragLayout>
