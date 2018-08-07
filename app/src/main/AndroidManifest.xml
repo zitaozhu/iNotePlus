@@ -20,7 +20,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.NoteEditingActivity"></activity>
+        <activity android:name=".activities.NoteEditingActivity" />
+        <activity android:name=".activities.AlbumDisplayActivity" />
+        <activity android:name=".activities.FavoriteNoteActivity" />
+        <activity android:name=".activities.FileExploerActivity" />
+        <activity android:name=".activities.PersonalPageActivity" />
+
+
     </application>
 
 </manifest>

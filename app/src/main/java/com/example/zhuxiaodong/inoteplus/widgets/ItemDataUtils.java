@@ -16,8 +16,7 @@ public class ItemDataUtils {
 
     public static List<ItemBean> getItemBeans(){
         List<ItemBean> itemBeans=new ArrayList<>();
-        itemBeans.add(new ItemBean(R.drawable.sidebar_purse,"My Purse",false));
-        itemBeans.add(new ItemBean(R.drawable.sidebar_decoration,"My Decorations",false));
+        itemBeans.add(new ItemBean(R.drawable.sidebar_purse,"Personal",false));
         itemBeans.add(new ItemBean(R.drawable.sidebar_favorit,"My Favorites",false));
         itemBeans.add(new ItemBean(R.drawable.sidebar_album,"My Album",false));
         itemBeans.add(new ItemBean(R.drawable.sidebar_file,"My Files",false));

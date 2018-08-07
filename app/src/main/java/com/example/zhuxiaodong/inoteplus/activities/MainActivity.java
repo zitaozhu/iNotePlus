@@ -1,5 +1,6 @@
 package com.example.zhuxiaodong.inoteplus.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.zhuxiaodong.inoteplus.R;
+import com.example.zhuxiaodong.inoteplus.database.NoteDatabaseHelper;
 import com.example.zhuxiaodong.inoteplus.entities.ItemBean;
 import com.example.zhuxiaodong.inoteplus.widgets.DragLayout;
 import com.example.zhuxiaodong.inoteplus.widgets.ItemDataUtils;
@@ -24,11 +26,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private ListView listView;
     private ImageView ivIcon, ivBottom;
     private QuickAdapter<ItemBean> quickAdapter;
+    private Context mContext;
+    protected NoteDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mContext = this;
+        dbHelper = NoteDatabaseHelper.getInstance(this);
+
         setStatusBar();
         initDragLayout();
         initView();
@@ -94,6 +101,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     int position, long arg3) {
                 Toast.makeText(MainActivity.this,"Click Item "+position,Toast.LENGTH_SHORT).show();
+                switch(position) {
+                    case 0:
+                        startActivity(new Intent(mContext, PersonalPageActivity.class));
+                        break;
+                    case 1:
+                        startActivity(new Intent(mContext, FavoriteNoteActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(mContext, AlbumDisplayActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(mContext, FileExploerActivity.class));
+                    default:
+                        break;
+                }
             }
         });
         ivIcon.setOnClickListener(new View.OnClickListener() {

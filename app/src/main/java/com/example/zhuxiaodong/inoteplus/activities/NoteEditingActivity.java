@@ -1,6 +1,7 @@
 package com.example.zhuxiaodong.inoteplus.activities;
 
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.zhuxiaodong.inoteplus.R;
+import com.example.zhuxiaodong.inoteplus.database.NoteDatabaseHelper;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -27,25 +29,35 @@ import java.io.OutputStreamWriter;
 
 public class NoteEditingActivity extends AppCompatActivity {
     private Context context;
+    private NoteDatabaseHelper dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_edit);
-
         context = this;
+        dbHelper = NoteDatabaseHelper.getInstance(this);
 
-        final EditText editText = (EditText) findViewById(R.id.contentfrag_edit);
+        final EditText contentText = (EditText) findViewById(R.id.noteedit_content);
+        final EditText titleText = (EditText) findViewById(R.id.noteedit_title);
         Button saveButton = (Button) findViewById(R.id.save_botton);
         Button resotreButton = (Button) findViewById(R.id.restore_button);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(editText.getText().toString().equals("")) {
+                if(contentText.getText().toString().equals("")) {
                     Toast.makeText(context, "no text to save", Toast.LENGTH_SHORT).show();
                 } else {
-                    saveText(editText.getText().toString());
+                    saveText(contentText.getText().toString());
+
+                    ContentValues values = new ContentValues();
+                    values.put("title", titleText.getText().toString());
+                    values.put("content", contentText.getText().toString());
+                    values.put("author", "zzt");
+                    values.put("date", System.currentTimeMillis());
+                    dbHelper.getWritableDatabase().insert("Note", null, values);
+                    //Toast.makeText(context, "note saved successfully", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -55,8 +67,8 @@ public class NoteEditingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String inputText = loadText();
                 if (!TextUtils.isEmpty(inputText)) {
-                    editText.setText(inputText);
-                    editText.setSelection(inputText.length());
+                    contentText.setText(inputText);
+                    contentText.setSelection(inputText.length());
                     Toast.makeText(context, "Restoring succeeded", Toast.LENGTH_SHORT).show();
                 }
             }

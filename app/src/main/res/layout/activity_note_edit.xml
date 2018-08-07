@@ -5,7 +5,12 @@
     android:orientation="vertical" >
 
     <EditText
-        android:id="@+id/contentfrag_edit"
+        android:id="@+id/noteedit_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <EditText
+        android:id="@+id/noteedit_content"
         android:layout_width="match_parent"
         android:layout_height="400dp" />
 
