@@ -33,10 +33,12 @@ import java.io.OutputStreamWriter;
 public class NoteEditingActivity extends AppCompatActivity {
     private Context context;
     private NoteDatabaseHelper dbHelper;
+    private boolean isExitstedNote = false;
 
     private int ID;
     private final String KEY = "id";
     private final String GET_MATCH_NOTE = "select * from Note where id = ";
+    private final String UPDATE_NOTE = "update Note set title = %s, content = %s where id = %s";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,12 @@ public class NoteEditingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(contentText.getText().toString().equals("")) {
                     Toast.makeText(context, "no text to save", Toast.LENGTH_SHORT).show();
+                } else if(isExitstedNote) {
+                    saveText(contentText.getText().toString());
+
+                    String updateStatement = String.format(UPDATE_NOTE, titleText.getText().toString(),
+                            contentText.getText().toString(), String.valueOf(ID));
+                    dbHelper.getWritableDatabase().rawQuery(updateStatement ,null);
                 } else {
                     saveText(contentText.getText().toString());
 
@@ -65,6 +73,7 @@ public class NoteEditingActivity extends AppCompatActivity {
                     values.put("date", System.currentTimeMillis());
                     dbHelper.getWritableDatabase().insert("Note", null, values);
                     //Toast.makeText(context, "note saved successfully", Toast.LENGTH_SHORT).show();
+                    isExitstedNote = true;
                 }
             }
         });
@@ -77,6 +86,7 @@ public class NoteEditingActivity extends AppCompatActivity {
                     contentText.setText(inputText);
                     contentText.setSelection(inputText.length());
                     Toast.makeText(context, "Restoring succeeded", Toast.LENGTH_SHORT).show();
+                    isExitstedNote = true;
                 }
             }
         });
@@ -86,8 +96,12 @@ public class NoteEditingActivity extends AppCompatActivity {
             SQLiteDatabase db = NoteDatabaseHelper.getInstance(context).getReadableDatabase();
             Cursor cursor = db.rawQuery(GET_MATCH_NOTE + ID, null);
             cursor.moveToFirst();
-            titleText.setText(cursor.getString(cursor.getColumnIndex("title")));
-            contentText.setText(cursor.getString(cursor.getColumnIndex("content")));
+            if(cursor.getCount() != 0) {
+                titleText.setText(cursor.getString(cursor.getColumnIndex("title")));
+                contentText.setText(cursor.getString(cursor.getColumnIndex("content")));
+                isExitstedNote = true;
+            }
+
         } else {
             Toast.makeText(this, "STH wrong happend that we counldn't found the note for you", Toast.LENGTH_SHORT).show();
         }
