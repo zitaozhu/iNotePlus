@@ -3,6 +3,9 @@ package com.example.zhuxiaodong.inoteplus.activities;
 import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +33,10 @@ import java.io.OutputStreamWriter;
 public class NoteEditingActivity extends AppCompatActivity {
     private Context context;
     private NoteDatabaseHelper dbHelper;
+
+    private int ID;
+    private final String KEY = "id";
+    private final String GET_MATCH_NOTE = "select * from Note where id = ";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +80,17 @@ public class NoteEditingActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Intent intent = getIntent();
+        if(intent.getExtras() != null && (ID = intent.getExtras().getInt(KEY)) != -1) {
+            SQLiteDatabase db = NoteDatabaseHelper.getInstance(context).getReadableDatabase();
+            Cursor cursor = db.rawQuery(GET_MATCH_NOTE + ID, null);
+            cursor.moveToFirst();
+            titleText.setText(cursor.getString(cursor.getColumnIndex("title")));
+            contentText.setText(cursor.getString(cursor.getColumnIndex("content")));
+        } else {
+            Toast.makeText(this, "STH wrong happend that we counldn't found the note for you", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
