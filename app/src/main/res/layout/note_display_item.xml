@@ -34,7 +34,23 @@ android:orientation="vertical">
             android:textColor="@android:color/white"
             android:layout_below="@id/listdisplay_title"/>
 
-
+        <ImageButton
+            android:id="@+id/displayitem_favorite_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_delete_forever_black_18"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/displayitem_deletion_btn"
+            android:paddingRight="10dp"/>
+        <ImageButton
+            android:id="@+id/displayitem_deletion_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_favorite_black_18"
+            android:background="@android:color/transparent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
