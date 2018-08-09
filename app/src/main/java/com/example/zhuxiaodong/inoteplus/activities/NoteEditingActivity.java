@@ -38,7 +38,7 @@ public class NoteEditingActivity extends AppCompatActivity {
     private int ID;
     private final String KEY = "id";
     private final String GET_MATCH_NOTE = "select * from Note where id = ";
-    private final String UPDATE_NOTE = "update Note set title = %s, content = %s where id = %s";
+    //private final String UPDATE_NOTE = "update Note set title = '%s', content = '%s' where id = %d";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,9 +60,14 @@ public class NoteEditingActivity extends AppCompatActivity {
                 } else if(isExitstedNote) {
                     saveText(contentText.getText().toString());
 
-                    String updateStatement = String.format(UPDATE_NOTE, titleText.getText().toString(),
-                            contentText.getText().toString(), String.valueOf(ID));
-                    dbHelper.getWritableDatabase().rawQuery(updateStatement ,null);
+                    ContentValues values = new ContentValues();
+                    values.put("title", titleText.getText().toString());
+                    values.put("content", contentText.getText().toString());
+                    dbHelper.getWritableDatabase().update("Note", values, "id = ?", new String[]{String.valueOf(ID)});
+//                    String updateStatement = String.format(UPDATE_NOTE, titleText.getText().toString(),
+//                            contentText.getText().toString(), ID);
+//                    Log.d("zzt", "debug onClick: " + updateStatement);
+//                    dbHelper.getWritableDatabase().rawQuery(updateStatement ,null);
                 } else {
                     saveText(contentText.getText().toString());
 
