@@ -12,6 +12,7 @@ import com.example.zhuxiaodong.inoteplus.R;
 import java.lang.reflect.Field;
 
 /**
+ * base acivity that contains the top bar
  * Created by zhuxiaodong on 2018/8/5.
  */
 
@@ -30,7 +31,7 @@ public class BaseActivity extends FragmentActivity {
 
     protected void setStatusBar() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            final ViewGroup linear_bar = (ViewGroup) findViewById(R.id.rl_title);
+            final ViewGroup linear_bar = findViewById(R.id.rl_title);
             final int statusHeight = getStatusBarHeight();
             linear_bar.post(new Runnable() {
                 @Override

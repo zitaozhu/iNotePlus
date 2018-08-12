@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 /**
+ * page for edit existing notes and new note
  * Created by zhuxiaodong on 2018/8/5.
  */
 
@@ -75,6 +76,7 @@ public class NoteEditingActivity extends AppCompatActivity {
                     values.put("title", titleText.getText().toString());
                     values.put("content", contentText.getText().toString());
                     values.put("author", "zzt");
+                    values.put("category", "none");
                     values.put("date", System.currentTimeMillis());
                     dbHelper.getWritableDatabase().insert("Note", null, values);
                     //Toast.makeText(context, "note saved successfully", Toast.LENGTH_SHORT).show();

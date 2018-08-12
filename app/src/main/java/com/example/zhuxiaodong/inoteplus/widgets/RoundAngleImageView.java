@@ -3,7 +3,6 @@ package com.example.zhuxiaodong.inoteplus.widgets;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,11 +11,11 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import com.example.zhuxiaodong.inoteplus.R;
 
 /**
+ * round imageview to display user portrait
  * Created by zhuxiaodong on 2018/8/5.
  */
 
@@ -99,7 +98,7 @@ public class RoundAngleImageView extends android.support.v7.widget.AppCompatImag
         path.arcTo(new RectF(
                         0,
                         getHeight()-roundHeight*2,
-                        0+roundWidth*2,
+                        roundWidth * 2,
                         getHeight()),
                 90,
                 90);
@@ -130,7 +129,7 @@ public class RoundAngleImageView extends android.support.v7.widget.AppCompatImag
                         getWidth()-roundWidth*2,
                         0,
                         getWidth(),
-                        0+roundHeight*2),
+                        roundHeight * 2),
                 -90,
                 90);
         path.close();

@@ -1,6 +1,7 @@
 package com.example.zhuxiaodong.inoteplus.entities;
 
 /**
+ * item bean to display notes
  * Created by zhuxiaodong on 2018/8/5.
  */
 

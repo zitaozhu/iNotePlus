@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.Random;
 
 /**
+ * list of colors available
  * Created by zhuxiaodong on 2018/8/8.
  */
 

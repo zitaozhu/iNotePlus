@@ -17,6 +17,7 @@ import com.example.zhuxiaodong.inoteplus.R;
 import com.nineoldandroids.view.ViewHelper;
 
 /**
+ * layout for draggable menu
  * Created by zhuxiaodong on 2018/8/5.
  */
 

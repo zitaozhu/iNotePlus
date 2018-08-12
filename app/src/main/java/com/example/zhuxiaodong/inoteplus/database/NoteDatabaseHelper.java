@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
+ * database helper to store notes, singleton
  * Created by zhuxiaodong on 2018/8/7.
  */
 
@@ -18,6 +19,7 @@ public class NoteDatabaseHelper extends SQLiteOpenHelper {
             + "title text, "
             + "content text, "
             + "author text, "
+            + "category text, "
             + "date numeric)";
 
     private static final String DB_NAME = "Note.db";

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private ImageView ivIcon, ivBottom;
     private QuickAdapter<ItemBean> quickAdapter;
     private Context mContext;
+    private View dispalyFragView;
     protected NoteDatabaseHelper dbHelper;
 
     @Override
@@ -36,6 +38,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         mContext = this;
         dbHelper = NoteDatabaseHelper.getInstance(this);
+        dispalyFragView = findViewById(R.id.notedisplay_fragment);
 
         setStatusBar();
         initDragLayout();
@@ -155,7 +158,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 Intent intent = new Intent(this, NoteEditingActivity.class);
                 intent.putExtra("editType", "new_note");
                 startActivity(intent);
+
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("zzt", "onResume: main");
+        dispalyFragView.invalidate();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        Log.d("zzt", "onResumeFragments: main");
+        dispalyFragView.invalidate();
     }
 }
