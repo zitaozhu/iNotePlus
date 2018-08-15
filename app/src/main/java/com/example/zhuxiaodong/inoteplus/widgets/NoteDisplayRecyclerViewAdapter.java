@@ -3,7 +3,6 @@ package com.example.zhuxiaodong.inoteplus.widgets;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,13 +94,15 @@ public class NoteDisplayRecyclerViewAdapter extends RecyclerView.Adapter<NoteDis
 
         Cursor cursor = dbHelper.getReadableDatabase().rawQuery(FAVORITE_NOTE_QUERY + holder.currentID, null);
         cursor.moveToFirst();
-        String catagory = cursor.getString(cursor.getColumnIndex("category"));
+        String category = cursor.getString(cursor.getColumnIndex("category"));
 
-        if(catagory != null && catagory.equals("favorite")) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                fav_button.setImageResource(R.drawable.baseline_favorite_black_18);
-            }
-        }
+//        if(category != null && category.equals("favorite")) {
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////                Log.d("zzt", "onBindViewHolder: " + category);
+//                fav_button.invalidate();
+//                fav_button.setImageResource(R.drawable.baseline_favorite_black_18);
+//            }
+//        }
         cursor.close();
     }
 

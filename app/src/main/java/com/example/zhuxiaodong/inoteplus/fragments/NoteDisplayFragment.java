@@ -38,7 +38,7 @@ public class NoteDisplayFragment extends Fragment implements NoteDisplayRecycler
             mView=inflater.inflate(R.layout.fragment_note_display,container,false);
         }
 
-        displayRecyclerView =(RecyclerView) mView.findViewById(R.id.notedisplay_recyclerview);
+        displayRecyclerView = mView.findViewById(R.id.notedisplay_recyclerview);
         displayRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(OrientationHelper.VERTICAL);
@@ -87,11 +87,15 @@ public class NoteDisplayFragment extends Fragment implements NoteDisplayRecycler
         values.put("category", "favorite");
         NoteDatabaseHelper.getInstance(getActivity()).getWritableDatabase()
                 .update("Note", values, "id = ?", new String[]{String.valueOf(noteID)});
+        mAdapter.refreshData();
     }
 
     private void deleteNote(int noteID) {
         NoteDatabaseHelper.getInstance(getActivity()).getWritableDatabase()
                 .delete("Note", "id = ?", new String[]{String.valueOf(noteID)});
         Toast.makeText(getActivity(), "Note deleted", Toast.LENGTH_SHORT).show();
+        mAdapter.refreshData();
+        displayRecyclerView.invalidate();
+
     }
 }
